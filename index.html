@@ -41,18 +41,10 @@
       letter-spacing: 0.02em;
     }
 
-    h1 {
-      font-size: 1.9rem;
-    }
+    h1 { font-size: 1.9rem; }
+    h2 { font-size: 1.2rem; margin-bottom: 0.75rem; }
 
-    h2 {
-      font-size: 1.2rem;
-      margin-bottom: 0.75rem;
-    }
-
-    p {
-      margin: 0;
-    }
+    p { margin: 0; }
 
     .app-shell {
       max-width: 1200px;
@@ -102,9 +94,7 @@
       color: var(--muted);
     }
 
-    .header-meta strong {
-      color: var(--accent);
-    }
+    .header-meta strong { color: var(--accent); }
 
     .pill {
       display: inline-flex;
@@ -133,9 +123,7 @@
 
     @media (max-width: 960px) {
       body { padding: 16px; }
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      .layout { grid-template-columns: minmax(0, 1fr); }
       .header { flex-direction: column; align-items: flex-start; }
       .header-meta { text-align: left; }
     }
@@ -166,9 +154,7 @@
       transition: opacity var(--transition);
     }
 
-    .card:hover::before {
-      opacity: 1;
-    }
+    .card:hover::before { opacity: 1; }
 
     .card-header {
       display: flex;
@@ -178,10 +164,7 @@
       margin-bottom: 12px;
     }
 
-    .card-header small {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
+    .card-header small { font-size: 0.78rem; color: var(--muted); }
 
     .card-section-title {
       font-size: 0.78rem;
@@ -191,9 +174,7 @@
       margin-bottom: 6px;
     }
 
-    .card-body {
-      font-size: 0.9rem;
-    }
+    .card-body { font-size: 0.9rem; }
 
     .grid-2 {
       display: grid;
@@ -242,9 +223,7 @@
       margin: 0;
     }
 
-    input[type="number"] {
-      -moz-appearance: textfield;
-    }
+    input[type="number"] { -moz-appearance: textfield; }
 
     .btn-row {
       display: flex;
@@ -322,13 +301,9 @@
       border: 1px solid rgba(148, 163, 184, 0.3);
     }
 
-    .pill-info strong {
-      color: var(--accent);
-    }
+    .pill-info strong { color: var(--accent); }
 
-    .spread-chip {
-      font-weight: 500;
-    }
+    .spread-chip { font-weight: 500; }
 
     .table-wrapper {
       margin-top: 12px;
@@ -398,9 +373,7 @@
       font-size: 0.78rem;
     }
 
-    .small {
-      font-size: 0.75rem;
-    }
+    .small { font-size: 0.75rem; }
 
     .badge-soft {
       padding: 2px 6px;
@@ -415,17 +388,10 @@
     .text-right { text-align: right; }
     .text-center { text-align: center; }
 
-    .elo-up {
-      color: #4ade80;
-    }
+    .elo-up { color: #4ade80; }
+    .elo-down { color: #fb7185; }
 
-    .elo-down {
-      color: #fb7185;
-    }
-
-    .section {
-      margin-top: 14px;
-    }
+    .section { margin-top: 14px; }
 
     .section-header {
       display: flex;
@@ -452,34 +418,9 @@
       margin-top: 4px;
     }
 
-    .danger {
-      color: var(--danger);
-    }
+    .danger { color: var(--danger); }
 
-    .chip-mini {
-      display: inline-flex;
-      align-items: center;
-      padding: 1px 6px;
-      border-radius: 999px;
-      background: rgba(15, 23, 42, 0.9);
-      border: 1px solid rgba(148, 163, 184, 0.35);
-      font-size: 0.68rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      gap: 4px;
-    }
-
-    .chip-mini-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 999px;
-      background: var(--accent);
-    }
-
-    .players-table {
-      max-height: 320px;
-    }
+    .players-table { max-height: 320px; }
 
     .link-like {
       cursor: pointer;
@@ -502,6 +443,17 @@
       border: 1px solid rgba(34, 197, 94, 0.4);
       color: #4ade80;
     }
+
+    .loading {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .error {
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-top: 6px;
+    }
   </style>
 </head>
 <body>
@@ -511,14 +463,14 @@
       <span class="badge">Suicide Squaf · Dynasty Tracker</span>
       <h1>Suicide Squaf Dynasty Tracker</h1>
       <p class="header-subtitle">
-        Track every user game, Elo movement, spreads, and head-to-head records for your CFB26 dynasty.
+        Shared Elo + spreads + head-to-head for your CFB26 dynasty. Data lives in Supabase, so every device sees the same league.
       </p>
     </div>
     <div class="header-meta">
       <div><strong>K = 30</strong> Elo, starting at <strong>1500</strong></div>
       <div class="pill">
         <div class="pill-dot"></div>
-        <span>All data saved in this browser (localStorage)</span>
+        <span>Data stored in Supabase (shared backend)</span>
       </div>
     </div>
   </header>
@@ -533,7 +485,7 @@
             <div class="card-section-title">Game Entry</div>
             <h2>Record a Result</h2>
           </div>
-          <small id="game-count-label">0 games recorded</small>
+          <small id="game-count-label">Loading…</small>
         </div>
 
         <div class="card-body">
@@ -575,6 +527,7 @@
           <p class="matrix-note">
             Elo: win = 1, loss = 0, tie = 0.5. Margin of victory increases the Elo swing.
           </p>
+          <div id="globalError" class="error" style="display:none;"></div>
         </div>
       </div>
 
@@ -585,7 +538,7 @@
             <div class="card-section-title">Standings</div>
             <h2>Current Elo</h2>
           </div>
-          <small id="player-count-label">0 players</small>
+          <small id="player-count-label">Loading…</small>
         </div>
         <div class="card-body">
           <div class="table-wrapper players-table">
@@ -618,7 +571,7 @@
           <h2>All Games &amp; Elo Movement</h2>
         </div>
         <small class="muted">
-          Newest games at the top · <span id="last-updated-label"></span>
+          Newest games at the top · <span id="last-updated-label">Loading…</span>
         </small>
       </div>
       <div class="card-body">
@@ -704,7 +657,7 @@
         <div class="section">
           <div class="section-header">
             <h3>Danger Zone</h3>
-            <p class="danger">Admin only – wipes all players &amp; games from this browser.</p>
+            <p class="danger">Admin only – wipes all players &amp; games from Supabase.</p>
           </div>
           <button class="secondary btn-small danger" type="button" id="resetDataBtn">
             Reset All Data
@@ -715,6 +668,9 @@
   </main>
 </div>
 
+<!-- Supabase client via CDN -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
   // ======= CONFIG =======
   const K_FACTOR = 30;
@@ -722,7 +678,11 @@
   const SPREAD_PER_POINT = 25; // Elo difference per point of spread.
   const ADMIN_PASSWORD = "changeme"; // TODO: change this to your secret
 
-  const STORAGE_KEY = "suicide_squaf_elo_app_v1";
+  // TODO: Replace these with your real Supabase values
+  const SUPABASE_URL = "https://suwuqcvpkmsilbjbqlye.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_gNrE33nAhbO4JOZR4nW4KA_9Tp2aXTP";
+
+  const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   // ======= STATE =======
   let state = {
@@ -734,31 +694,6 @@
   let editingGameId = null;
 
   // ======= UTILITIES =======
-  function uuid() {
-    return "xxxx-4xxx-yxxx".replace(/[xy]/g, c => {
-      const r = (Math.random() * 16) | 0;
-      const v = c === "x" ? r : (r & 0x3) | 0x8;
-      return v.toString(16);
-    });
-  }
-
-  function saveState() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }
-
-  function loadState() {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (!raw) return;
-    try {
-      const parsed = JSON.parse(raw);
-      if (parsed && Array.isArray(parsed.players) && Array.isArray(parsed.games)) {
-        state = parsed;
-      }
-    } catch (e) {
-      console.error("Failed to parse saved state", e);
-    }
-  }
-
   function formatDate(iso) {
     const d = new Date(iso);
     if (Number.isNaN(d.getTime())) return iso;
@@ -772,6 +707,18 @@
 
   function halfPointRound(num) {
     return Math.round(num * 2) / 2;
+  }
+
+  function showError(message) {
+    const el = document.getElementById("globalError");
+    el.textContent = message;
+    el.style.display = "block";
+  }
+
+  function clearError() {
+    const el = document.getElementById("globalError");
+    el.textContent = "";
+    el.style.display = "none";
   }
 
   // Margin-of-victory multiplier (sports Elo style)
@@ -903,12 +850,8 @@
   };
 
   function rebuildPlayerSelects() {
-    const selects = [
-      els.player1Select,
-      els.player2Select
-    ];
-    const placeholderOption = (label) =>
-      `<option value="">${label}</option>`;
+    const selects = [els.player1Select, els.player2Select];
+    const placeholderOption = (label) => `<option value="">${label}</option>`;
 
     selects.forEach((sel, idx) => {
       const label =
@@ -933,12 +876,15 @@
   }
 
   function render() {
+    clearError();
     const { ratings, enrichedGames, stats } = computeElo();
     const h2h = computeHeadToHead(enrichedGames);
 
     // Meta labels
-    els.playerCountLabel.textContent = `${state.players.length} player${state.players.length === 1 ? "" : "s"}`;
-    els.gameCountLabel.textContent = `${state.games.length} game${state.games.length === 1 ? "" : "s"} recorded`;
+    els.playerCountLabel.textContent =
+      `${state.players.length} player${state.players.length === 1 ? "" : "s"}`;
+    els.gameCountLabel.textContent =
+      `${state.games.length} game${state.games.length === 1 ? "" : "s"} recorded`;
     if (state.games.length > 0) {
       const newest = state.games.reduce((a, b) =>
         new Date(a.dateISO) > new Date(b.dateISO) ? a : b
@@ -1115,7 +1061,8 @@
     const r2 = ratings.get(p2Id) ?? START_ELO;
 
     if (!p1Id || !p2Id || p1Id === p2Id) {
-      els.preGameInfo.innerHTML = `<span>Choose two different players to see their current Elo, line, and projected Elo change.</span>`;
+      els.preGameInfo.innerHTML =
+        `<span>Choose two different players to see their current Elo, line, and projected Elo change.</span>`;
       return;
     }
 
@@ -1160,36 +1107,109 @@
     `;
   }
 
+  // ======= SUPABASE LOAD/SAVE =======
+  async function loadFromSupabase() {
+    try {
+      clearError();
+      els.playerCountLabel.textContent = "Loading…";
+      els.gameCountLabel.textContent = "Loading…";
+      els.lastUpdatedLabel.textContent = "Loading…";
+
+      const { data: playersData, error: playersError } =
+        await supabaseClient
+          .from("players")
+          .select("*")
+          .order("name", { ascending: true });
+
+      if (playersError) throw playersError;
+
+      const { data: gamesData, error: gamesError } =
+        await supabaseClient
+          .from("games")
+          .select("*")
+          .order("created_at", { ascending: true });
+
+      if (gamesError) throw gamesError;
+
+      state.players = (playersData || []).map(row => ({
+        id: row.id,
+        name: row.name
+      }));
+
+      state.games = (gamesData || []).map(row => ({
+        id: row.id,
+        dateISO: row.created_at,
+        player1Id: row.player1_id,
+        player2Id: row.player2_id,
+        score1: row.score1,
+        score2: row.score2
+      }));
+
+      render();
+    } catch (err) {
+      console.error("Error loading from Supabase", err);
+      showError("Error loading data from Supabase. Check your URL and anon key.");
+      els.playerCountLabel.textContent = "Error";
+      els.gameCountLabel.textContent = "Error";
+      els.lastUpdatedLabel.textContent = "Error";
+    }
+  }
+
   // ======= EVENT HANDLERS =======
-  function handleAddPlayer() {
+  async function handleAddPlayer() {
     const name = els.newPlayerName.value.trim();
     if (!name) return;
     if (state.players.some(p => p.name.toLowerCase() === name.toLowerCase())) {
       alert("That name is already in use. Player names must be unique.");
       return;
     }
-    const id = uuid();
-    state.players.push({ id, name });
-    els.newPlayerName.value = "";
-    saveState();
-    render();
+    try {
+      clearError();
+      const { data, error } = await supabaseClient
+        .from("players")
+        .insert({ name })
+        .select()
+        .single();
+      if (error) throw error;
+
+      state.players.push({ id: data.id, name: data.name });
+      els.newPlayerName.value = "";
+      render();
+    } catch (err) {
+      console.error("Error adding player", err);
+      showError("Error adding player. Check Supabase connection.");
+    }
   }
 
-  function handleResetData() {
+  async function handleResetData() {
     if (!adminMode) {
       alert("Admin mode is OFF. Use Admin Login first.");
       return;
     }
-    if (!confirm("This will delete ALL players and games from this browser. Are you sure?")) {
+    if (!confirm("This will delete ALL players and games from Supabase. Are you sure?")) {
       return;
     }
-    state = { players: [], games: [] };
-    editingGameId = null;
-    saveState();
-    render();
+    try {
+      clearError();
+      // Delete games first (foreign key)
+      const gamesCopy = [...state.games];
+      for (const g of gamesCopy) {
+        await supabaseClient.from("games").delete().eq("id", g.id);
+      }
+      const playersCopy = [...state.players];
+      for (const p of playersCopy) {
+        await supabaseClient.from("players").delete().eq("id", p.id);
+      }
+      state = { players: [], games: [] };
+      editingGameId = null;
+      render();
+    } catch (err) {
+      console.error("Error resetting data", err);
+      showError("Error resetting data. Check Supabase connection.");
+    }
   }
 
-  function handleGameSubmit(event) {
+  async function handleGameSubmit(event) {
     event.preventDefault();
     const player1Id = els.player1Select.value;
     const player2Id = els.player2Select.value;
@@ -1205,37 +1225,70 @@
       return;
     }
 
-    if (editingGameId) {
-      const idx = state.games.findIndex(g => g.id === editingGameId);
-      if (idx !== -1) {
-        state.games[idx].player1Id = player1Id;
-        state.games[idx].player2Id = player2Id;
-        state.games[idx].score1 = score1;
-        state.games[idx].score2 = score2;
-      }
-      editingGameId = null;
-      els.saveGameBtn.textContent = "Save Game";
-    } else {
-      const newGame = {
-        id: uuid(),
-        dateISO: new Date().toISOString(),
-        player1Id,
-        player2Id,
-        score1,
-        score2
-      };
-      state.games.push(newGame);
-    }
+    try {
+      clearError();
+      if (editingGameId) {
+        const { data, error } = await supabaseClient
+          .from("games")
+          .update({
+            player1_id: player1Id,
+            player2_id: player2Id,
+            score1,
+            score2
+          })
+          .eq("id", editingGameId)
+          .select()
+          .single();
+        if (error) throw error;
 
-    saveState();
-    els.score1Input.value = "";
-    els.score2Input.value = "";
-    render();
+        state.games = state.games.map(g =>
+          g.id === editingGameId
+            ? {
+                id: data.id,
+                dateISO: data.created_at,
+                player1Id: data.player1_id,
+                player2Id: data.player2_id,
+                score1: data.score1,
+                score2: data.score2
+              }
+            : g
+        );
+        editingGameId = null;
+        els.saveGameBtn.textContent = "Save Game";
+      } else {
+        const { data, error } = await supabaseClient
+          .from("games")
+          .insert({
+            player1_id: player1Id,
+            player2_id: player2Id,
+            score1,
+            score2
+          })
+          .select()
+          .single();
+        if (error) throw error;
+
+        state.games.push({
+          id: data.id,
+          dateISO: data.created_at,
+          player1Id: data.player1_id,
+          player2Id: data.player2_id,
+          score1: data.score1,
+          score2: data.score2
+        });
+      }
+
+      els.score1Input.value = "";
+      els.score2Input.value = "";
+      render();
+    } catch (err) {
+      console.error("Error saving game", err);
+      showError("Error saving game. Check Supabase connection.");
+    }
   }
 
   function handlePlayersTableClick(event) {
     const eloHighlight = event.target.closest("[data-highlight-player]");
-
     if (eloHighlight) {
       const id = eloHighlight.getAttribute("data-highlight-player");
       highlightPlayerGames(id);
@@ -1297,17 +1350,23 @@
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function deleteGame(gameId) {
+  async function deleteGame(gameId) {
     if (!confirm("Delete this game? Elo ratings will be recalculated without it.")) {
       return;
     }
-    state.games = state.games.filter(g => g.id !== gameId);
-    if (editingGameId === gameId) {
-      editingGameId = null;
-      els.saveGameBtn.textContent = "Save Game";
+    try {
+      clearError();
+      await supabaseClient.from("games").delete().eq("id", gameId);
+      state.games = state.games.filter(g => g.id !== gameId);
+      if (editingGameId === gameId) {
+        editingGameId = null;
+        els.saveGameBtn.textContent = "Save Game";
+      }
+      render();
+    } catch (err) {
+      console.error("Error deleting game", err);
+      showError("Error deleting game. Check Supabase connection.");
     }
-    saveState();
-    render();
   }
 
   function handleAdminLogin() {
@@ -1331,10 +1390,8 @@
     }
   }
 
-  function init() {
-    loadState();
-    render();
-
+  // ======= INIT =======
+  function wireEventListeners() {
     els.addPlayerBtn.addEventListener("click", handleAddPlayer);
     els.newPlayerName.addEventListener("keydown", (e) => {
       if (e.key === "Enter") {
@@ -1357,7 +1414,12 @@
     els.adminLoginBtn.addEventListener("click", handleAdminLogin);
   }
 
-  // Call init directly so it runs immediately on load
+  async function init() {
+    renderAdminStatus();
+    wireEventListeners();
+    await loadFromSupabase();
+  }
+
   init();
 </script>
 </body>
